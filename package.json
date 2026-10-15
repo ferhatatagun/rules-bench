@@ -1,0 +1,13 @@
+{
+  "name": "rules-bench",
+  "version": "0.1.0",
+  "description": "What do your Claude Code rule, skill and agent packs cost in context before you type a word?",
+  "type": "module",
+  "bin": { "rules-bench": "bin/rules-bench.mjs" },
+  "scripts": {
+    "test": "node --test test/*.test.mjs"
+  },
+  "engines": { "node": ">=20" },
+  "license": "MIT",
+  "files": ["bin", "src", "README.md", "LICENSE"]
+}
