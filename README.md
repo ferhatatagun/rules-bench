@@ -20,6 +20,7 @@ node bin/rules-bench.mjs path/to/pack [path/to/other-pack ...]
 | `--json` | machine-readable output |
 
 Without `--exact`, counts use the same ~3.7 chars/token heuristic as [context-lens](https://github.com/ferhatatagun/context-lens), so they are **estimates**.
+The heuristic is calibrated to the older tokenizer; current models (Sonnet/Opus/Haiku 5.x) count the same text as roughly 30% more tokens, so treat estimates as a lower bound and use `--exact` (default model `claude-sonnet-5-5`) for the real startup number.
 With `--exact`, on-demand numbers stay estimates (a 700k-token pack can't be sent in one request).
 
 ## First results (estimates, 200K window, 2026-10)
