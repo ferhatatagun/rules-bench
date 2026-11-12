@@ -17,21 +17,18 @@ Startup is the number that matters. It is paid on every session whether or not t
 ## Steps
 
 1. **Locate the pack folder** (a cloned repo or `~/.claude`). Ask the user if unclear.
-2. **Get the tool** (zero dependencies, Node 20+):
+2. **Run it** (zero dependencies, Node 20+, nothing to install):
    ```bash
-   git clone https://github.com/ferhatatagun/rules-bench && cd rules-bench
+   npx rules-bench path/to/pack [path/to/other-pack ...]
    ```
-3. **Run it** on one or more packs:
-   ```bash
-   node bin/rules-bench.mjs path/to/pack [path/to/other-pack ...]
-   ```
+   If npm is unavailable: `git clone https://github.com/ferhatatagun/rules-bench` and run `node bin/rules-bench.mjs <pack>`.
    Useful flags:
    - `--skip-root` when the pack's own `CLAUDE.md` describes the repo, not the pack.
    - `--rules common,typescript` to count only the `rules/<subdir>`s the user will actually install.
    - `--window <n>` for a non-default window (default 200000).
    - `--exact` for an exact startup count (needs `ANTHROPIC_API_KEY`).
    - `--json` for machine-readable output.
-4. **Report** a table: pack, startup tokens, % of window, on-demand total, average cost per triggered skill.
+3. **Report** a table: pack, startup tokens, % of window, on-demand total, average cost per triggered skill.
 
 ## Reading the result
 

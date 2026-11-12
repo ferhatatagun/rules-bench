@@ -12,5 +12,5 @@
 3. Decide which rules/ subfolders to install
 4. Verify a trim actually reduced startup cost
 
-**Needs access to:** Node 20+, git (clones github.com/ferhatatagun/rules-bench)
+**Needs access to:** Node 20+ (npx rules-bench)
 **Link back:** https://github.com/ferhatatagun/rules-bench
