@@ -1,4 +1,4 @@
-import { readdirSync, readFileSync, statSync, existsSync } from 'node:fs';
+import { readdirSync, readFileSync, statSync, existsSync, realpathSync } from 'node:fs';
 import { join, dirname, relative } from 'node:path';
 import { parseFrontmatter } from './frontmatter.mjs';
 
@@ -16,15 +16,24 @@ export const estimateTokens = (text) => Math.ceil(text.length / CHARS_PER_TOKEN)
  *   refs     = extra files shipped next to a skill, read only if the skill asks for them
  */
 
-/** @param {string} dir @param {(f: string) => boolean} pred @returns {string[]} */
-function walk(dir, pred) {
+/**
+ * Recursive file walk. Follows symlinks (skills are often symlinked into place) but
+ * never enters the same real directory twice, so symlink cycles can't loop forever,
+ * and skips dangling links instead of crashing.
+ * @param {string} dir @param {(f: string) => boolean} pred @param {Set<string>} [seen] @returns {string[]}
+ */
+function walk(dir, pred, seen = new Set()) {
   if (!existsSync(dir)) return [];
+  const real = realpathSync(dir);
+  if (seen.has(real)) return [];
+  seen.add(real);
   const out = [];
   for (const name of readdirSync(dir).sort()) {
     if (name === 'node_modules' || name === '.git') continue;
     const p = join(dir, name);
-    const st = statSync(p);
-    if (st.isDirectory()) out.push(...walk(p, pred));
+    let st;
+    try { st = statSync(p); } catch { continue; } // dangling symlink
+    if (st.isDirectory()) out.push(...walk(p, pred, seen));
     else if (pred(p)) out.push(p);
   }
   return out;
