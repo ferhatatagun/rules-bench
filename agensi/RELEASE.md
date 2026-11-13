@@ -7,3 +7,6 @@ npm uses Trusted Publishing (OIDC), no token needed.
 2. If your npm account has staged publishing on, approve the release at npmjs.com -> Staged Packages.
 3. Verify: `npx rules-bench@latest --help`
 4. Agensi: upload `dist/context-cost-audit.zip` at agensi.io/dashboard/submit using the matching `agensi/LISTING-<skill>.md` (first release or skill changes only).
+
+## Skills in this repo
+context-cost-audit (rules-bench), prompt-preflight (context-lens), claude-api-xray (claudoscope), agent-trace-debugger (agent-replay), prompt-ab-test (prompt-lab), tool-design-sandbox (tool-lab). Each has `skills/<name>/`, `dist/<name>.zip` and `agensi/LISTING-<name>.md`.
