@@ -18,7 +18,7 @@ Or from a clone: `node bin/rules-bench.mjs path/to/pack`.
 | `--window <n>` | context window in tokens (default 200000) |
 | `--skip-root` | ignore the pack's own `CLAUDE.md` / `AGENTS.md` (use for repos where those describe the repo, not the pack) |
 | `--rules common,typescript` | only count these `rules/<subdir>`s — mirrors "install common + your language" |
-| `--exact` | exact **startup** count via the free `count_tokens` endpoint (`ANTHROPIC_API_KEY`) |
+| `--exact` | exact **startup** count via the free `count_tokens` endpoint (`ANTHROPIC_API_KEY`). **Sends the pack's startup text to api.anthropic.com**; without this flag nothing leaves your machine |
 | `--json` | machine-readable output |
 
 Without `--exact`, counts use the same ~3.7 chars/token heuristic as [context-lens](https://github.com/ferhatatagun/context-lens), so they are **estimates**.

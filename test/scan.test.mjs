@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, mkdirSync, writeFileSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, writeFileSync, symlinkSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { parseFrontmatter } from '../src/frontmatter.mjs';
@@ -54,4 +54,14 @@ test('rulesOnly filters rules subdirs', () => {
   const items = scanPack(root, { rulesOnly: ['common'] });
   assert.equal(items.length, 1);
   assert.match(items[0].file, /common/);
+});
+
+test('symlink cycles and dangling links do not hang or crash', () => {
+  const root = mkdtempSync(join(tmpdir(), 'rb-'));
+  mkdirSync(join(root, 'rules'));
+  writeFileSync(join(root, 'rules', 'a.md'), 'y'.repeat(37));
+  symlinkSync(root, join(root, 'rules', 'loop'), 'dir'); // cycle back to the pack root
+  symlinkSync(join(root, 'missing'), join(root, 'rules', 'dangling')); // target does not exist
+  const items = scanPack(root);
+  assert.equal(items.filter((i) => i.kind === 'rules').length, 1);
 });
