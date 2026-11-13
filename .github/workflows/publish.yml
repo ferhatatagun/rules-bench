@@ -1,15 +1,17 @@
 name: publish
-# Publishes to npm when package.json's version is not on npm yet.
-# Triggers: any push to main, a v* tag, or manual run.
-# Requires repo secret NPM_TOKEN.
+# Publishes to npm via Trusted Publishing (OIDC): no npm token is stored anywhere.
+# Runs on any push to main and on manual dispatch; it skips when package.json's
+# version already exists on npm. Release = bump "version" and merge to main.
+#
+# One-time setup on npmjs.com -> package rules-bench -> Settings -> Trusted Publisher:
+#   GitHub Actions, owner ferhatatagun, repo rules-bench, workflow filename publish.yml
 on:
   push:
     branches: [main]
-    tags: ["v*"]
   workflow_dispatch:
 permissions:
   contents: read
-  id-token: write
+  id-token: write # OIDC token for npm trusted publishing + provenance
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -17,6 +19,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with: { node-version: 22, registry-url: "https://registry.npmjs.org" }
+      - run: npm install -g npm@latest # trusted publishing needs npm >= 11.5.1
       - id: check
         run: |
           NAME=$(node -p "require('./package.json').name")
@@ -30,5 +33,3 @@ jobs:
         run: npm test
       - if: steps.check.outputs.publish == 'true'
         run: npm publish --provenance --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
