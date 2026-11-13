@@ -1,11 +1,10 @@
 name: publish
 # Publishes to npm when package.json's version is not on npm yet.
-# Triggers: merge to main touching package.json, a v* tag, or manual run.
+# Triggers: any push to main, a v* tag, or manual run.
 # Requires repo secret NPM_TOKEN.
 on:
   push:
     branches: [main]
-    paths: [package.json]
     tags: ["v*"]
   workflow_dispatch:
 permissions:
