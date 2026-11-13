@@ -3,11 +3,44 @@
   "version": "0.1.0",
   "description": "What do your Claude Code rule, skill and agent packs cost in context before you type a word?",
   "type": "module",
-  "bin": { "rules-bench": "bin/rules-bench.mjs" },
+  "bin": {
+    "rules-bench": "bin/rules-bench.mjs"
+  },
   "scripts": {
     "test": "node --test test/*.test.mjs"
   },
-  "engines": { "node": ">=20" },
+  "engines": {
+    "node": ">=20"
+  },
   "license": "MIT",
-  "files": ["bin", "src", "README.md", "LICENSE"]
+  "files": [
+    "bin",
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
+  "author": "Ferhat Atagün",
+  "homepage": "https://github.com/ferhatatagun/rules-bench#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ferhatatagun/rules-bench.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ferhatatagun/rules-bench/issues"
+  },
+  "keywords": [
+    "claude-code",
+    "claude",
+    "context-window",
+    "tokens",
+    "benchmark",
+    "claude-md",
+    "skills",
+    "agents",
+    "rules",
+    "cli"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
 }

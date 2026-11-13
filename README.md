@@ -8,8 +8,10 @@ Zero dependencies, no backend. Point it at a pack's folder and it splits the cos
 - **On-demand** — loaded only when a skill / agent / command triggers (bodies, plus files shipped next to a skill).
 
 ```bash
-node bin/rules-bench.mjs path/to/pack [path/to/other-pack ...]
+npx rules-bench path/to/pack [path/to/other-pack ...]
 ```
+
+Or from a clone: `node bin/rules-bench.mjs path/to/pack`.
 
 | Option | |
 |---|---|
