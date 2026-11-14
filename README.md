@@ -36,6 +36,19 @@ With `--exact`, on-demand numbers stay estimates (a 700k-token pack can't be sen
 
 Takeaways: a four-rule CLAUDE.md is ~60× cheaper than a typical ECC setup, and installing all of ECC's rules at once spends over half the window before the first prompt.
 
+## Agent skills
+
+The same ideas as free agent skills, in `skills/` here and on [Agensi](https://www.agensi.io):
+
+| Skill | From | What it does |
+|---|---|---|
+| [context-cost-audit](https://agensi.io/skills/context-cost-audit-what-does-your-claude-code-pack-cost) | this repo | Measure what a rules/skill/agent pack costs before the first prompt |
+| [prompt-preflight](https://agensi.io/skills/prompt-preflight-tokens-window-and-cost-before-you-ship) | [context-lens](https://github.com/ferhatatagun/context-lens) | Tokens, window position and cost of a prompt before it ships |
+| [claude-api-xray](https://agensi.io/skills/claude-api-x-ray-cache-tokens-and-cost-per-call) | [claudoscope](https://github.com/ferhatatagun/claudoscope) | Split an API response into cache read/write, input, output and cost |
+| [agent-trace-debugger](https://agensi.io/skills/agent-trace-debugger-replay-a-claude-agent-step-by-step) | [agent-replay](https://github.com/ferhatatagun/agent-replay) | Replay a tool-use trace and flag failures |
+| [prompt-ab-test](https://agensi.io/skills/prompt-a-b-test-compare-prompts-by-cost-speed-and-output) | [prompt-lab](https://github.com/ferhatatagun/prompt-lab) | Compare two prompts or models on cost, speed and output |
+| [tool-design-sandbox](https://agensi.io/skills/tool-design-sandbox-design-claude-tools-before-building-them) | [tool-lab](https://github.com/ferhatatagun/tool-lab) | Review tool schemas and simulate the loop with mocked results |
+
 ## Dev
 
 ```bash
