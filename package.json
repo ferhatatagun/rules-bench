@@ -1,6 +1,6 @@
 {
   "name": "rules-bench",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "What do your Claude Code rule, skill and agent packs cost in context before you type a word?",
   "type": "module",
   "bin": {
